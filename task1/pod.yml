@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shared-network
+spec:
+  containers:
+  - name: nginx-app
+    image: nginx:1.21
+    ports:
+    - containerPort: 80
+
+  - name: sidecar
+    image: curlimages/curl:latest
+    command: ['sh', '-c', 'while true; do curl localhost:80; sleep 5; done' ]
